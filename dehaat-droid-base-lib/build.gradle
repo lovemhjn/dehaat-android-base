@@ -6,6 +6,11 @@ plugins {
 android {
     compileSdk 31
 
+    buildFeatures {
+        dataBinding = true
+        viewBinding = true
+    }
+
     defaultConfig {
         minSdk 21
         targetSdk 31
@@ -44,4 +49,12 @@ dependencies {
     implementation 'com.google.android.material:material:1.5.0'
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0"
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.5.21"
+    implementation "androidx.navigation:navigation-fragment-ktx:2.4.0"
+    implementation "androidx.navigation:navigation-ui-ktx:2.4.0"
+    implementation "com.squareup.retrofit2:retrofit:2.9.0"
+    implementation "com.github.kirich1409:viewbindingpropertydelegate:1.4.5"
+    implementation "com.google.code.gson:gson:2.8.9"
+    implementation "androidx.paging:paging-runtime-ktx:3.0.0"
 }

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="please_wait_msg">Please wait…</string>
+    <string name="base_no_records_found">No record(s) found.</string>
+    <string name="no_internet">No Internet Connection</string>
+    <string name="server_no_respond">Server is not responding</string>
+    <string name="internet_slow">Your internet connection is slow</string>
+    <string name="unknown_error">Unknown error</string>
+    <string name="tech_prob">Technical problem occurred, try again after some time</string>
+    <string name="colon">: \u0020</string>
+    <string name="error_location">Location not found.</string>
+    <string name="error_open_map">Map supported app not found.</string>
+    <string name="error_map_not_found">Google map not found</string>
+    <string name="error_phone_number_not_found">Phone number not found</string>
+    <string name="whatsapp_not_installed">Whatsapp app not installed in your phone</string>
+    <string name="loading">Loading...</string>
+</resources>
