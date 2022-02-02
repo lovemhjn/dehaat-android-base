@@ -1,0 +1,3 @@
+rootProject.name = "Dehaat Android Base"
+include ':app'
+include ':dehaat-droid-base-lib'
