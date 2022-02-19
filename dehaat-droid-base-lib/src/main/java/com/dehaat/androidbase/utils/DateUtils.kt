@@ -7,6 +7,7 @@ object DateFormat {
     const val YYYY_D_MM_D_DD = "yyyy-MM-dd"
     const val dd_MMM_yyy = "dd-MMM-yyyy"
     const val EEE_dd_MMM = "EEE, dd MMM"
+    const val dd_MM_yyy = "dd-MM-yyyy"
 }
 
 object DateUtils {

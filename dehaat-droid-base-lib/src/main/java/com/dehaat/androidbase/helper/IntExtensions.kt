@@ -5,3 +5,5 @@ fun Int.ordinal(): String {
     val num = this % 100
     return this.toString() + suffix[if (num in 4..20) 0 else num % 10]
 }
+
+fun Int?.orZero() = this ?: 0
