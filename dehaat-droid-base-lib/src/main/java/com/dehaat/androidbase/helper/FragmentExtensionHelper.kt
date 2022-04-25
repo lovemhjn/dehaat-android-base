@@ -16,6 +16,7 @@ import com.dehaat.androidbase.AndroidAppBase
 import com.dehaat.androidbase.utils.IntentUtils
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import java.util.*
 
 inline fun Fragment.ifFragmentSafe(block: (activity: FragmentActivity) -> Unit) {
@@ -105,6 +106,13 @@ fun AppCompatActivity.setStartDestinationWithBundle(
 
 fun <T> Fragment.launchWhenStartedWithViewLifecycleOwner(flow: Flow<T>, flowCollectionBlock: suspend (T) -> Unit) =
     viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+        flow.collectLatest {
+            flowCollectionBlock(it)
+        }
+    }
+
+fun <T> Fragment.launchWithViewLifecycleOwner(flow: Flow<T>, flowCollectionBlock: suspend (T) -> Unit) =
+    viewLifecycleOwner.lifecycleScope.launch {
         flow.collectLatest {
             flowCollectionBlock(it)
         }
