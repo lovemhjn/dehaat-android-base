@@ -8,5 +8,6 @@ sealed class UIState<out D> {
     sealed class Loaded<out D> : UIState<D>() {
         data class Success<D>(val data: D) : Loaded<D>()
         data class Failure(@MessageType val type: Int, val errorMessage: String) : Loaded<Nothing>()
+        object OnSessionExpired : Loaded<Nothing>()
     }
 }
