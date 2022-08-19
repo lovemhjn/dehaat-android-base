@@ -19,7 +19,7 @@ sealed class APIResponse<out D> : APIState.PostExecute<D>() {
 
         object NullResponse : Failure()
 
-        data class ResponseUnsuccessful(val error: DataResponseUnsuccessful) : Failure()
+        data class ResponseUnsuccessful(val apiExtraInfo: ApiExtraInfo?, val error: DataResponseUnsuccessful) : Failure()
 
         data class APIException(val errorMsg: String?, val error: Exception) :
             Failure()
@@ -31,3 +31,6 @@ data class DataResponseUnsuccessful(
     val errorCode: Int,
     val errorMsgResponse: String,
 )
+
+class ApiExtraInfo: LinkedHashMap<String, String>() {
+}
