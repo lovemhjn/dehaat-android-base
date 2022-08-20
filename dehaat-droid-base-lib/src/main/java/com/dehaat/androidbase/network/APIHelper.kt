@@ -2,14 +2,16 @@ package com.dehaat.androidbase.network
 
 import com.dehaat.androidbase.callbacks.IProgressViewListener
 import com.dehaat.androidbase.helper.tryCatchWithReturn
+import com.dehaat.androidbase.network.intercepters.ApiTimeoutException
 import com.google.gson.Gson
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import okhttp3.Request
 import retrofit2.Response
 
 suspend fun <B> getAPIResponse(
 	apiCall: suspend () -> Response<B>,
-	getExtraInfo: (Response<B>?) -> ApiExtraInfo
+	getExtraInfo: (Request?) -> ApiExtraInfo
 ): APIResponse<B> {
 	return try {
 		with(apiCall()) {
@@ -17,23 +19,27 @@ suspend fun <B> getAPIResponse(
 				APIResponse.Success(body())
 			} else {
 				APIResponse.Failure.ResponseUnsuccessful(
-					getExtraInfo(this),
 					DataResponseUnsuccessful(
 						errorBody(),
 						code(),
 						message()
-					)
+					),
+					getExtraInfo(this.raw().request)
 				)
 			}
 		}
 
 	} catch (error: Exception) {
 		error.printStackTrace()
-		APIResponse.Failure.APIException(error.message, error)
+		if(error is ApiTimeoutException){
+			APIResponse.Failure.APIException(error.message, error, getExtraInfo(error.request))
+		} else {
+			APIResponse.Failure.APIException(error.message, error)
+		}
 	}
 }
 
-suspend fun <B> getAPIStates(apiCall: suspend () -> Response<B>?, getExtraInfo: ((Response<B>?) -> ApiExtraInfo)? = null): Flow<APIState<B>> {
+suspend fun <B> getAPIStates(apiCall: suspend () -> Response<B>?): Flow<APIState<B>> {
 	return flow {
 
 		emit(APIState.PreExecute)
@@ -45,7 +51,6 @@ suspend fun <B> getAPIStates(apiCall: suspend () -> Response<B>?, getExtraInfo: 
 						APIResponse.Success(body())
 					} else {
 						APIResponse.Failure.ResponseUnsuccessful(
-                            getExtraInfo?.invoke(this),
 							DataResponseUnsuccessful(
 								errorBody(),
 								code(),
