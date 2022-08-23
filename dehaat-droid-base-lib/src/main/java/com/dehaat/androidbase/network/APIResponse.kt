@@ -1,5 +1,6 @@
 package com.dehaat.androidbase.network
 
+import com.cleanarch.base.common.ApiExtraInfo
 import com.dehaat.androidbase.network.model.BaseResponseWithData
 import okhttp3.ResponseBody
 
@@ -19,9 +20,9 @@ sealed class APIResponse<out D> : APIState.PostExecute<D>() {
 
         object NullResponse : Failure()
 
-        data class ResponseUnsuccessful(val error: DataResponseUnsuccessful) : Failure()
+        data class ResponseUnsuccessful(val error: DataResponseUnsuccessful, val apiExtraInfo: ApiExtraInfo? = null) : Failure()
 
-        data class APIException(val errorMsg: String?, val error: Exception) :
+        data class APIException(val errorMsg: String?, val error: Exception, val apiExtraInfo: ApiExtraInfo? = null) :
             Failure()
     }
 }

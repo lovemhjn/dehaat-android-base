@@ -15,7 +15,7 @@ android {
         minSdk 21
         targetSdk 31
         versionCode 1
-        versionName "0.0.2-beta-6"
+        versionName "0.0.2-beta-7"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -38,7 +38,7 @@ android {
 
 dependencies {
 
-    implementation "com.github.Dehaat:clean-arch-base:0.0.1"
+    implementation "com.github.Dehaat:clean-arch-base:0.0.2"
 
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
