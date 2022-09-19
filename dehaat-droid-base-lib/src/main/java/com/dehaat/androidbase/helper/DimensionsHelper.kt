@@ -9,7 +9,12 @@ import androidx.annotation.Dimension
 fun Number.dpToPx(
     metrics: DisplayMetrics = Resources.getSystem().displayMetrics
 ): Float {
-    return toFloat() * metrics.density
+    val pixelValue =  toFloat() * metrics.density
+    return if(pixelValue.isNaN()) {
+        toFloat()
+    } else {
+        pixelValue
+    }
 }
 
 @JvmOverloads
@@ -17,5 +22,10 @@ fun Number.dpToPx(
 fun Number.pxToDp(
     metrics: DisplayMetrics = Resources.getSystem().displayMetrics
 ): Float {
-    return toFloat() / metrics.density
+    val dpValue = toFloat() / metrics.density
+    return if(dpValue.isNaN()) {
+        toFloat()
+    } else {
+        dpValue
+    }
 }
